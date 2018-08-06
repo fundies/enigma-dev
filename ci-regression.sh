@@ -39,7 +39,11 @@ fi
 mv ./test-harness-out ${PREVIOUS_PWD}
 
 if [[ "${PWD}" == "${TEST_HARNESS_MASTER_DIR}" ]]; then
+  # Stash unstaged changes
   git stash
+
+  # Clear unstaged changes
+  git checkout --
 
   if [[ -n "$TRAVIS_PULL_REQUEST_SHA" ]] && [[ -n "$TRAVIS_BRANCH" ]]; then
     echo "This appears to be a Travis pull request integration run; checking out '$TRAVIS_BRANCH' for the comparison."
@@ -55,7 +59,9 @@ if [[ "${PWD}" == "${TEST_HARNESS_MASTER_DIR}" ]]; then
     echo "You appear to be on branch ${GIT_BRANCH}. Checking out branch master for the comparison"
     git checkout master
   fi
-  git clean -f -d
+
+  # Remove untracked files
+  git clean -fd
 
   echo "Rebuilding plugin and harness from last commit..."
   make all
