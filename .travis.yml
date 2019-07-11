@@ -37,18 +37,6 @@ jobs:
   allow_failures:
     - os: osx
   include:
-    - stage: Linux Jobs
-      script: ./CI/linux_jobs.sh
-      env: WORKER=0
-    - stage: Linux Jobs
-      script: ./CI/linux_jobs.sh
-      env: WORKER=1
-    - stage: Linux Jobs
-      script: ./CI/linux_jobs.sh
-      env: WORKER=2
-    - stage: Linux Jobs
-      script: ./CI/linux_jobs.sh
-      env: WORKER=3
     - stage: Cross Compile
       env: COMPILER=MinGW32 PLATFORM=Win32 Widgets=Win32 AUDIO=DirectSound EXTENSIONS="DirectShow,WindowsTouch,XInput,MediaControlInterface,FileDropper,IniFileSystem" OUTPUT="/tmp/test.exe"
     - stage: Cross Compile 
