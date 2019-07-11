@@ -71,7 +71,7 @@ if [ "$1" == "install" ]; then
   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
     sudo apt-get -y install $LINUX_DEPS
     
-    if [ "MINGW_DEPS" == "TRUE" ]; then
+    if [ "$MINGW_DEPS" == "TRUE" ]; then
       sudo update-alternatives --set i686-w64-mingw32-g++ /usr/bin/i686-w64-mingw32-g++-posix
       sudo update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix
       curl -L https://github.com/enigma-dev/enigma-dev/files/2431000/enigma-libs.zip > enigma-libs.zip;
