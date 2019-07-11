@@ -43,17 +43,14 @@ if [ "$1" == "install" ]; then
 
   ###### Figure out our deps ######
   LINUX_DEPS="xvfb"
-  OSX_DEPS=""
   MINGW_DEPS="FALSE"
   for job in $(seq $START 1 $END);
   do
-    LINUX_DEPS=$(bash -c "${JOBS[$job]} LINUX_DEPS="$LINUX_DEPS" ./CI/solve_engine_deps.sh")
+    LINUX_DEPS=$(bash -c "${JOBS[$job]} LINUX_DEPS=\"$LINUX_DEPS\" ./CI/solve_engine_deps.sh")
     if [[ "${JOBS[$job]}" =~ "MinGW" ]]; then
       MINGW_DEPS="TRUE"
     fi
   done
-
-  echo "Worker Deps: $LINUX_DEPS"
 
   ###### Install Deps #######
   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
@@ -66,7 +63,7 @@ if [ "$1" == "install" ]; then
     fi
     
   elif [ "$TRAVIS_OS_NAME" == "osx" ]; then
-    brew install "$OSX_DEPS"
+    brew install glew
   fi
   
 elif [ "$1" == "run" ]; then
