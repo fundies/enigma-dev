@@ -1,6 +1,8 @@
 #!/bin/bash +x
 set -e  # exit if any command fails
 
+xfwm & # We need a wm for these tests
+
 if [ -z "$1" ]; then
   echo "No directory specified to check out master for regression tests."
   echo "Aborting!"

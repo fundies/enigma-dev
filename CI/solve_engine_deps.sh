@@ -2,7 +2,7 @@
 
 ###### Harness #######
 if [ "$TEST_HARNESS" == true ]; then
-  LINUX_DEPS="$LINUX_DEPS libgtest-dev wmctrl xdotool"
+  LINUX_DEPS="$LINUX_DEPS xfwm libgtest-dev wmctrl xdotool"
 fi
 
 ###### Compilers #######
