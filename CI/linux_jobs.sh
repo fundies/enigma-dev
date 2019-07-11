@@ -27,7 +27,7 @@ JOBS[20]='COMPILER=clang32'
 if [ "$WORKER" != "" ]; then 
 
   JOB_COUNT=20
-  TRAVIS_WORKERS=5
+  TRAVIS_WORKERS=4
 
   SPLIT=$(($JOB_COUNT / $TRAVIS_WORKERS))
   START=$(( $WORKER * $SPLIT ))
@@ -50,6 +50,8 @@ if [ "$1" == "install" ]; then
     ./CI/solve_engine_deps.sh
   done
 
+  echo "Worker Deps: $LINUX_DEPS"
+
   ###### Install Deps #######
   if [ "$TRAVIS_OS_NAME" == "linux" ]; then
     sudo apt-get -y install $LINUX_DEPS
@@ -70,8 +72,8 @@ elif [ "$1" == "run" ]; then
   for job in $(seq $START 1 $END);
   do
     echo -e "\n\n\e[32m====================================================\n\
-  \e[32mRunning ${JOBS[$job]}\n\
-  \e[32m====================================================\n\n"
+\e[32mRunning ${JOBS[$job]}\n\
+\e[32m====================================================\n\n"
     bash -c "${JOBS[$job]} ./CI/build_and_run_game.sh"
   done;
 
