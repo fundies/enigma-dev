@@ -42,12 +42,15 @@ fi
 if [ "$1" == "install" ]; then
 
   ###### Figure out our deps ######
-  export LINUX_DEPS="xvfb"
-  export OSX_DEPS=""
-  export MINGW_DEPS="FALSE"
+  LINUX_DEPS="xvfb"
+  OSX_DEPS=""
+  MINGW_DEPS="FALSE"
   for job in $(seq $START 1 $END);
   do
-    bash -c "${JOBS[$job]} ./CI/solve_engine_deps.sh"
+    LINUX_DEPS=$(bash -c "${JOBS[$job]} LINUX_DEPS="$LINUX_DEPS" ./CI/solve_engine_deps.sh")
+    if [[ "${JOBS[$job]}" ~= "MinGW" ]]; then
+      MINGW_DEPS="TRUE"
+    fi
   done
 
   echo "Worker Deps: $LINUX_DEPS"
