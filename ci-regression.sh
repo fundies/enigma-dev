@@ -1,7 +1,10 @@
 #!/bin/bash +x
+
 set -e  # exit if any command fails
 
-xfwm & # We need a wm for these tests
+if [[ "$TRAVIS" -eq "true" ]]; then
+  xfwm4 & # We need a wm for these tests
+fi
 
 if [ -z "$1" ]; then
   echo "No directory specified to check out master for regression tests."
