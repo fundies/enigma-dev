@@ -64,8 +64,6 @@ if [ "$1" == "install" ]; then
     brew install "$OSX_DEPS"
   fi
   
-fi
-
 elif [ "$1" == "run" ]; then
 
   ###### Run Jobs #######
