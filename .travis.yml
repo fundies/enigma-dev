@@ -27,9 +27,9 @@ before_install:
   - sudo add-apt-repository -y ppa:maarten-fonville/protobuf;
   - sudo apt-get update --option Acquire::Retries=100 --option Acquire::http::Timeout="60";
 
-install: ./CI/install_emake_deps.sh && ./CI/install_engine_deps.sh
+install: ./CI/install_emake_deps.sh && ./CI/linux_jobs.sh install
 before_script: make -j4 && make -j4 emake
-script: ./CI/build_and_run_game.sh
+script: ./CI/linux_jobs.sh run
     
 jobs:
   # don't wait for OSX
@@ -37,24 +37,25 @@ jobs:
   allow_failures:
     - os: osx
   include:
-    - stage: Cross Compile
-      env: COMPILER=MinGW32 PLATFORM=Win32 Widgets=Win32 AUDIO=DirectSound EXTENSIONS="DirectShow,WindowsTouch,XInput,MediaControlInterface,FileDropper,IniFileSystem" OUTPUT="/tmp/test.exe"
-    - stage: Cross Compile 
-      env: COMPILER=MinGW64 PLATFORM=Win32 Widgets=Win32 AUDIO=DirectSound EXTENSIONS="DirectShow,WindowsTouch,XInput,MediaControlInterface,FileDropper,IniFileSystem" OUTPUT="/tmp/test.exe"
-    - stage: Cross Compile 
-      env: COMPILER=gcc32
-    - stage: Cross Compile 
-      env: COMPILER=clang
-    - stage: Cross Compile 
-      env: COMPILER=clang32
-    - stage: Mac OSX
-      os: osx
-      osx_image: xcode9.2
-      env: COMPILER=clang PLATFORM=None
-    - stage: Mac OSX
-      os: osx
-      osx_image: xcode9.2
-      env: COMPILER=clang PLATFORM=None
-    - stage: Test Harness
+    - stage: ENIGMA CI
       env: TEST_HARNESS=true AUDIO=OpenAL 
+      script: ./CI/build_and_run_game.sh
+    - stage: ENIGMA CI
+      env: WORKER=0
+    - stage: ENIGMA CI
+      env: WORKER=1
+    - stage: ENIGMA CI
+      env: WORKER=2
+    - stage: ENIGMA CI
+      env: WORKER=3
+    - stage: ENIGMA CI
+      os: osx
+      osx_image: xcode9.2
+      env: COMPILER=clang PLATFORM=None
+      script: ./CI/build_and_run_game.sh
+    - stage: ENIGMA CI
+      os: osx
+      osx_image: xcode9.2
+      env: COMPILER=clang PLATFORM=None
+      script: ./CI/build_and_run_game.sh
 
