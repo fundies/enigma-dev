@@ -18,7 +18,8 @@ clean: .FORCE
 all: libpng-util libProtocols libEGM ENIGMA emake test-runner .FORCE
 
 Game: .FORCE
-	@$(MAKE) -C ENIGMAsystem/SHELL > >(tee logs/enigma_compile.log) 2>&1
+	@$(RM) -f logs/enigma_compile.log
+	@$(MAKE) -C ENIGMAsystem/SHELL > >(tee -a logs/enigma_compile.log) 2> >(tee -a logs/enigma_compile.log >&2)
 
 clean-game: .FORCE
 	$(MAKE) -C ENIGMAsystem/SHELL clean
