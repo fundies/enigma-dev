@@ -52,7 +52,7 @@ jobs:
     - stage: ENIGMA CI
       os: osx
       osx_image: xcode10.2
-      env: COMPILER=clang PLATFORM=None
+      env: COMPILER=gcc PLATFORM=None
       before_install:
       script: ./CI/build_and_run_game.sh
     - stage: ENIGMA CI
