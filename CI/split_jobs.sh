@@ -60,7 +60,6 @@ if [ "$1" == "install" ]; then
       LINUX_DEPS=$(bash -c "${JOBS[$job]} LINUX_DEPS=\"$LINUX_DEPS\" ./CI/solve_engine_deps.sh")
       if [[ "${JOBS[$job]}" =~ "MinGW" ]]; then
         MINGW_DEPS="TRUE"
-        echo "wat"
       fi
     elif [ "$TRAVIS_OS_NAME" == "osx" ]; then
       OSX_DEPS=$(bash -c "${JOBS[$job]} OSX_DEPS=\"$OSX_DEPS\" ./CI/solve_engine_deps.sh")
