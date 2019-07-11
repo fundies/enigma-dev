@@ -29,8 +29,8 @@ if [ "$TRAVIS_OS_NAME" == "linux" ]; then
 elif [ "$TRAVIS_OS_NAME" == "osx" ]; then
   JOBS[0]='COMPILER=gcc PLATFORM=None'
   JOBS[1]='COMPILER=clang PLATFORM=None'
-  JOB_COUNT=21
-  TRAVIS_WORKERS=4
+  JOB_COUNT=2
+  TRAVIS_WORKERS=1
 else
   echo "Error: Unsupported OS"
   exit 1
@@ -60,6 +60,7 @@ if [ "$1" == "install" ]; then
       LINUX_DEPS=$(bash -c "${JOBS[$job]} LINUX_DEPS=\"$LINUX_DEPS\" ./CI/solve_engine_deps.sh")
       if [[ "${JOBS[$job]}" =~ "MinGW" ]]; then
         MINGW_DEPS="TRUE"
+        echo "wat"
       fi
     elif [ "$TRAVIS_OS_NAME" == "osx" ]; then
       OSX_DEPS=$(bash -c "${JOBS[$job]} OSX_DEPS=\"$OSX_DEPS\" ./CI/solve_engine_deps.sh")
@@ -71,6 +72,7 @@ if [ "$1" == "install" ]; then
     sudo apt-get -y install $LINUX_DEPS
     
     if [ "MINGW_DEPS" == "TRUE" ]; then
+      sudo update-alternatives --set i686-w64-mingw32-g++ /usr/bin/i686-w64-mingw32-g++-posix
       sudo update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix
       curl -L https://github.com/enigma-dev/enigma-dev/files/2431000/enigma-libs.zip > enigma-libs.zip;
       unzip enigma-libs.zip -d ENIGMAsystem/;
