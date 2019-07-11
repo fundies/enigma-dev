@@ -29,7 +29,7 @@ before_install:
 
 install: ./CI/install_emake_deps.sh && ./CI/install_engine_deps.sh
 before_script: make -j4 && make -j4 emake
-script: ./CI/build_and_run_game.sh
+script: ./emake -m Run -x MinGW32 -p Win32 -w Win32 -a DirectSound -e "DirectShow,WindowsTouch,XInput,MediaControlInterface,FileDropper,IniFileSystem" -o "/tmp/test.exe"
     
 jobs:
   # don't wait for OSX
