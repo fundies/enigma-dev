@@ -59,4 +59,8 @@ if [[ "$EXTENSIONS" =~ "ttf" ]]; then
   LINUX_DEPS="$LINUX_DEPS libfreetype6-dev"
 fi
 
-echo "$LINUX_DEPS"
+if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+  echo "$LINUX_DEPS"
+elif [ "$TRAVIS_OS_NAME" == "osx" ]; then
+  echo "$OSX_DEPS"
+fi
