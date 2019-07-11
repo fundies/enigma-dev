@@ -18,15 +18,15 @@ JOBS[12]='WIDGETS=GTK+'
 JOBS[13]='WIDGETS=Zenity'
 JOBS[14]='WIDGETS=KDialog'
 JOBS[15]='COLLISION=BBox EXTENSIONS="Alarms,Timelines,DataStructures,Asynchronous,BasicGUI,DateTime,GM5Compat,IniFilesystem,Json,XRandR,Paths,MotionPlanning,ttf,Box2DPhysics,StudioPhysics,BulletDynamics"'
-JOBS[16]='COMPILER=MinGW32 PLATFORM=Win32 Widgets=Win32 AUDIO=DirectSound EXTENSIONS="DirectShow,WindowsTouch,XInput,MediaControlInterface,FileDropper,IniFileSystem" OUTPUT="/tmp/test.exe"'
-JOBS[17]='COMPILER=MinGW64 PLATFORM=Win32 Widgets=Win32 AUDIO=DirectSound EXTENSIONS="DirectShow,WindowsTouch,XInput,MediaControlInterface,FileDropper,IniFileSystem" OUTPUT="/tmp/test.exe"'
+JOBS[16]='COMPILER=MinGW32 PLATFORM=Win32 Widgets=Win32 AUDIO=DirectSound EXTENSIONS="DirectShow,WindowsTouch,XInput,MediaControlInterface,FileDropper" OUTPUT="/tmp/test.exe"'
+JOBS[17]='COMPILER=MinGW64 PLATFORM=Win32 Widgets=Win32 AUDIO=DirectSound EXTENSIONS="DirectShow,WindowsTouch,XInput,MediaControlInterface,FileDropper" OUTPUT="/tmp/test.exe"'
 JOBS[18]='COMPILER=gcc32'
 JOBS[19]='COMPILER=clang'
 JOBS[20]='COMPILER=clang32'
 
 if [ "$WORKER" != "" ]; then 
 
-  JOB_COUNT=20
+  JOB_COUNT=21
   TRAVIS_WORKERS=4
 
   SPLIT=$(($JOB_COUNT / $TRAVIS_WORKERS))
