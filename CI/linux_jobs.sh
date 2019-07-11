@@ -24,15 +24,19 @@ JOBS[18]='COMPILER=gcc32'
 JOBS[19]='COMPILER=clang'
 JOBS[20]='COMPILER=clang32'
 
-JOB_COUNT=20
-TRAVIS_WORKERS=5
+if [ "$WORKER" != "" ]; then 
 
-SPLIT=$(($JOB_COUNT / $TRAVIS_WORKERS))
-START=$(( $WORKER * $SPLIT ))
-if [[ $WORKER -lt $((TRAVIS_WORKERS-1)) ]]; then
-  END=$(($WORKER * $SPLIT + $SPLIT))
-else
-  END=$JOB_COUNT
+  JOB_COUNT=20
+  TRAVIS_WORKERS=5
+
+  SPLIT=$(($JOB_COUNT / $TRAVIS_WORKERS))
+  START=$(( $WORKER * $SPLIT ))
+  if [[ $WORKER -lt $((TRAVIS_WORKERS-1)) ]]; then
+    END=$(($WORKER * $SPLIT + $SPLIT))
+  else
+    END=$JOB_COUNT
+  fi
+
 fi
 
 if [ "$1" == "install" ]; then
@@ -42,8 +46,8 @@ if [ "$1" == "install" ]; then
   export OSX_DEPS=""
   export MINGW_DEPS="FALSE"
   for job in $(seq $START 1 $END);
-    ./CI/solve_engine_deps.sh
   do
+    ./CI/solve_engine_deps.sh
   done
 
   ###### Install Deps #######

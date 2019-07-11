@@ -49,6 +49,8 @@ jobs:
     - stage: ENIGMA CI
       env: WORKER=3
     - stage: ENIGMA CI
+      env: WORKER=4
+    - stage: ENIGMA CI
       os: osx
       osx_image: xcode9.2
       env: COMPILER=clang PLATFORM=None
