@@ -104,12 +104,12 @@ override CPPFLAGS += -I. -I$(CODEGEN) -I$(SHARED_SRC_DIR)
 all: compile_game
 
 print_flags:
-	@echo "\n################ Compiler Flags ################"
+	@echo -e "\n################ Compiler Flags ################"
 	@echo "CXXFLAGS=\"$(CXXFLAGS) $(CPPFLAGS) $(INCLUDES)\""
 	@echo "CFLAGS=\"$(CFLAGS) $(CPPFLAGS)\""
 	@echo "LDFLAGS=\"$(LDFLAGS)\""
 	@echo "LDLIBS=\"$(LDIBS)\""
-	@echo "#################################################\n"
+	@echo -e "#################################################\n"
 
 clean:
 	$(RM) $(OUTPUTNAME) $(RESOURCEBINARY)
