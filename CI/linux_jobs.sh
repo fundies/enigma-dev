@@ -30,9 +30,6 @@ else
   END=$JOB_COUNT
 fi
 
-echo "glxinfo"
-xvfb-run glxinfo
-
 for job in $(seq $START 1 $END);
 do
   echo -e "\n\n\e[32m====================================================\n\
