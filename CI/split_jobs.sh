@@ -3,9 +3,34 @@
 set -e
 
 if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-  source ./CI/linux_jobs.sh
+  JOBS[0]='PLATFORM=None GRAPHICS=None AUDIO=None COLLISION=None NETWORK=None WIDGETS=None EXTENSIONS="None"'
+  JOBS[1]='PLATFORM=SDL GRAPHICS=OpenGL1'
+  JOBS[2]='PLATFORM=SDL GRAPHICS=OpenGL3'
+  JOBS[3]='GRAPHICS=OpenGL1 EXTENSIONS="ParticleSystems"'
+  JOBS[4]='GRAPHICS=OpenGL3 EXTENSIONS="ParticleSystems"'
+  JOBS[5]='GRAPHICS=OpenGLES2 PLATFORM=SDL EXTENSIONS="ParticleSystems"'
+  JOBS[6]='AUDIO=OpenAL EXTENSIONS="GME"'
+  JOBS[7]='AUDIO=SFML EXTENSIONS="GME"'
+  JOBS[8]='COLLISION=BBox NETWORK=None EXTENSIONS="Paths,MotionPlanning"'
+  JOBS[9]='COLLISION=Precise NETWORK=None EXTENSIONS="Paths,MotionPlanning"'
+  JOBS[10]='NETWORK=Asynchronous'
+  JOBS[11]='NETWORK=BerkeleySockets'
+  JOBS[12]='WIDGETS=GTK+'
+  JOBS[13]='WIDGETS=Zenity'
+  JOBS[14]='WIDGETS=KDialog'
+  JOBS[15]='COLLISION=BBox EXTENSIONS="Alarms,Timelines,DataStructures,Asynchronous,BasicGUI,DateTime,GM5Compat,IniFilesystem,Json,XRandR,Paths,MotionPlanning,ttf,Box2DPhysics,StudioPhysics,BulletDynamics"'
+  JOBS[16]='COMPILER=MinGW32 PLATFORM=Win32 Widgets=Win32 AUDIO=DirectSound EXTENSIONS="DirectShow,WindowsTouch,XInput,MediaControlInterface,FileDropper" OUTPUT="/tmp/test.exe"'
+  JOBS[17]='COMPILER=MinGW64 PLATFORM=Win32 Widgets=Win32 AUDIO=DirectSound EXTENSIONS="DirectShow,WindowsTouch,XInput,MediaControlInterface,FileDropper" OUTPUT="/tmp/test.exe"'
+  JOBS[18]='COMPILER=gcc32'
+  JOBS[19]='COMPILER=clang'
+  JOBS[20]='COMPILER=clang32'
+  JOB_COUNT=21
+  TRAVIS_WORKERS=4
 elif [ "$TRAVIS_OS_NAME" == "osx" ]; then
-  source ./CI/osx_jobs.sh
+  JOBS[0]='COMPILER=gcc PLATFORM=None'
+  JOBS[1]='COMPILER=clang PLATFORM=None'
+  JOB_COUNT=21
+  TRAVIS_WORKERS=4
 else
   echo "Error: Unsupported OS"
   exit 1
