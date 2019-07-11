@@ -48,7 +48,7 @@ if [ "$1" == "install" ]; then
   for job in $(seq $START 1 $END);
   do
     LINUX_DEPS=$(bash -c "${JOBS[$job]} LINUX_DEPS="$LINUX_DEPS" ./CI/solve_engine_deps.sh")
-    if [[ "${JOBS[$job]}" ~= "MinGW" ]]; then
+    if [[ "${JOBS[$job]}" =~ "MinGW" ]]; then
       MINGW_DEPS="TRUE"
     fi
   done
