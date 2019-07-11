@@ -47,7 +47,7 @@ if [ "$1" == "install" ]; then
   export MINGW_DEPS="FALSE"
   for job in $(seq $START 1 $END);
   do
-    ./CI/solve_engine_deps.sh
+    bash -c "${JOBS[$job]} ./CI/solve_engine_deps.sh"
   done
 
   echo "Worker Deps: $LINUX_DEPS"
