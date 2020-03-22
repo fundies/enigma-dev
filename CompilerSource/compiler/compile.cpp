@@ -22,7 +22,7 @@
 #include "backend/GameData.h"
 #include "settings.h"
 
-#include "general/darray.h"
+#include "darray.h"
 
 #include <cstdio>
 
@@ -33,7 +33,7 @@
 #else
  #define dllexport extern "C"
  #include <unistd.h>
- #define sleep(x) usleep(x * 1000)m
+ #define sleep(x) usleep(x * 1000)
 #endif
 
 #define idpr(x,y) \
